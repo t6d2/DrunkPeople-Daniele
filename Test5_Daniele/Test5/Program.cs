@@ -48,7 +48,7 @@ namespace Test5
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Pub.Instance.CreateDrunk(new BeerDrunk(true, false));
         }
     }
 
@@ -61,13 +61,8 @@ namespace Test5
         }
         public static Pub Instance { get; }
 
-        //public IDrunk CreateDrunk()
-        //{
-        //    return
-        //}
-
-        public void CreateDrunk()
-        {
+        public IDrunk CreateDrunk(Drunk drunk)
+        { 
             
         }
     }
@@ -75,49 +70,63 @@ namespace Test5
     public interface IDrunk
     {
         void GoHome();
-
-        
+       
     }
 
     public interface IDrunkLevel
     {
         bool IsDrunk();
-        void CalculateMaxSteps();
+        int CalculateMoreSteps();
+        int CalculateLessSteps();
     }
 
     public class Drunk : IDrunk
     {
+        public Drunk(bool isDrunk, bool muchDrunk)
+        {
+            _IsDrunk = isDrunk;
+            _MuchDrunk = muchDrunk;
+            
+        }
+        private bool _IsDrunk { get; set; }
+        private bool _MuchDrunk { get; set; }
+
         public void GoHome()
         {
-
 
         }
     }
 
     public class WineDrunk : Drunk
     {
-
+        public WineDrunk(bool isDrunk, bool muchDrunk) : base(isDrunk,muchDrunk)
+        {
+        }
     }
 
     public class BeerDrunk : Drunk
     {
-
+        public BeerDrunk(bool isDrunk, bool muchDrunk) : base(isDrunk, muchDrunk)
+        {
+        }
     }
 
     public class LittleDrunkLevel : IDrunkLevel
     {
-        
-
         public bool IsDrunk()
         {
             return true;
         }
 
-        public void CalculateMaxSteps()
+        public int CalculateMoreSteps()
         {
             throw new NotImplementedException();
         }
 
+        public int CalculateLessSteps()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class MuchDrunkLevel : IDrunkLevel
@@ -127,7 +136,12 @@ namespace Test5
             return true;
         }
 
-        public void CalculateMaxSteps()
+        public int CalculateMoreSteps()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int CalculateLessSteps()
         {
             throw new NotImplementedException();
         }
@@ -148,10 +162,14 @@ namespace Test5
             return false;
         }
 
-        public decimal CalculateMaxSteps()
+        public int CalculateMoreSteps()
+        {
+            return 0;
+        }
+
+        public int CalculateLessSteps()
         {
             return 0;
         }
     }
-
 }
