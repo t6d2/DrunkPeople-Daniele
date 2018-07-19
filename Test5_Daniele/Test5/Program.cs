@@ -62,8 +62,8 @@ namespace Test5
         public static Pub Instance { get; }
 
         public IDrunk CreateDrunk(Drunk drunk)
-        { 
-            
+        {
+            return null;
         }
     }
 
@@ -82,11 +82,16 @@ namespace Test5
 
     public class Drunk : IDrunk
     {
+        public IDrunkLevel DrunkLevel { get; set; }
         public Drunk(bool isDrunk, bool muchDrunk)
         {
             _IsDrunk = isDrunk;
             _MuchDrunk = muchDrunk;
-            
+            if (muchDrunk)
+                DrunkLevel.CalculateMoreSteps();
+            else
+                DrunkLevel.CalculateLessSteps();
+
         }
         private bool _IsDrunk { get; set; }
         private bool _MuchDrunk { get; set; }
