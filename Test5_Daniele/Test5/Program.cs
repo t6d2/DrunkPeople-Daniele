@@ -87,11 +87,13 @@ namespace Test5
         {
             _IsDrunk = isDrunk;
             _MuchDrunk = muchDrunk;
-            if (muchDrunk)
-                DrunkLevel.CalculateMoreSteps();
-            else
-                DrunkLevel.CalculateLessSteps();
-
+            if (isDrunk)
+            {
+                if (muchDrunk)
+                    DrunkLevel.CalculateMoreSteps();
+                else
+                    DrunkLevel.CalculateLessSteps();
+            }
         }
         private bool _IsDrunk { get; set; }
         private bool _MuchDrunk { get; set; }
@@ -118,6 +120,7 @@ namespace Test5
 
     public class LittleDrunkLevel : IDrunkLevel
     {
+
         public bool IsDrunk()
         {
             return true;
